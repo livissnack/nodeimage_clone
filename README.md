@@ -4,9 +4,8 @@
 
 自己闲来无事仿照nodeimage搓了一个复刻版图床出来，本来想着自己用，后来想了一下还是分享吧。
 
-[演示网址](https://tc.vpsyyds.eu.org/)
+[演示网址](https://tc.lxvps.eu.org/)
 
-![image](https://tc.cxkikun.com/i/2025/12/01/692d6c06d0630.webp)
 
 
 ## 介绍
