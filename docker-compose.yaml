@@ -8,6 +8,7 @@ services:
     environment:
       - PORT=7878
       - NODE_ENV=production
+      - SESSION_SECRET=t6M4Xu32jZN0lf7gBz0tEDnDwQ4Zt42boQW2dHZU
     volumes:
       - ./data:/app/data
       - ./uploads:/app/uploads
