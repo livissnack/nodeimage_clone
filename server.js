@@ -352,7 +352,7 @@ app.post('/api/upload', requireAuth, upload.single('image'), async (req, res) =>
       return res.status(429).json({ message: '已达到今日上传上限' });
     }
 
-    const watermarkText = autoWatermark ? (watermarkContent || 'nodeimage.com clone') : '';
+    const watermarkText = autoWatermark ? (watermarkContent || 'doniai.com clone') : '';
 
     const processed = await processImage(req.file.buffer, {
       compressToWebp,

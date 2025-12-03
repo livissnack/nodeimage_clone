@@ -1,21 +1,21 @@
 {
-  "name": "nodeimage-clone",
+  "name": "doniai-image",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon --ignore uploads/**/* --ignore data/**/* server.js"
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
-    "express": "^4.19.2",
+    "express": "^5.2.1",
     "express-session": "^1.18.0",
     "fs-extra": "^11.2.0",
-    "mime-types": "^2.1.35",
-    "multer": "^1.4.5-lts.1",
+    "mime-types": "^3.0.2",
+    "multer": "2.0.2",
     "nanoid": "^5.0.7",
-    "sharp": "^0.33.5"
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
