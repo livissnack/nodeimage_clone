@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nodeimage 克隆版</title>
+  <title>DoniaiImage</title>
   <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/notification.css">
@@ -16,9 +16,9 @@
       <div class="nav-left">
         <h1 class="nav-title" id="goHome">
           <img id="brandLogo" data-default="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgBAMAAAB54XoeAAAAAXNSR0IArs4c6QAAAAlwSFlzAAASdAAAEnQB3mYfeAAAAA9QTFRFR3BM////M7L/d3d3AAAApK3DWgAAAAF0Uk5TAEDm2GYAAAGESURBVHja7dpBasQwDIVh4xsY5gBG4xOUuUA17/5nKrRTlEAiavt1SIj+jXYfciBZmKSTJUPROIvlWZUNisORxCyzOR7jMQoh0oJWZYOSLKFUSQtatiAf5J4580HymeW4YP0fMB8YlJOAEuBMNcAAAzw4iFckELAIYMMqnQLNs3QQNM8TfdD3rI8JEJuNgw9spqPgHTuNgtjrOQY27DYGPmB93lZTR8D70ivltpwYAdsaLMsJHQBhPUspBTaBZz/YXBCjoJ243GwC0G4QbwbRC7a3g9oJ4vwg+sAGPui8KdMgfiEaaF8bA7ULhLXxPZwHUYpNCmgFGOChQAlwFtTrgXI5UNmgkEE9PChkUNmgkEFlg0IGlQ0KGRQyqGRQhQuqcEERLihcUIULigQYYIABBhhggAFeB0wXBXOAE2BN310JTD/lw4I1vaKDmQQmMlj9P3VbN5is/FdQfdBigDX5K2Izb8FVE6B57oqt/4LFF/uvlHyxAV0rpo18zxfTZtn1LPe8XwEcnwijZxw9AAAAAElFTkSuQmCC" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgBAMAAAB54XoeAAAAAXNSR0IArs4c6QAAAAlwSFlzAAASdAAAEnQB3mYfeAAAAA9QTFRFR3BM////M7L/d3d3AAAApK3DWgAAAAF0Uk5TAEDm2GYAAAGESURBVHja7dpBasQwDIVh4xsY5gBG4xOUuUA17/5nKrRTlEAiavt1SIj+jXYfciBZmKSTJUPROIvlWZUNisORxCyzOR7jMQoh0oJWZYOSLKFUSQtatiAf5J4580HymeW4YP0fMB8YlJOAEuBMNcAAAzw4iFckELAIYMMqnQLNs3QQNM8TfdD3rI8JEJuNgw9spqPgHTuNgtjrOQY27DYGPmB93lZTR8D70ivltpwYAdsaLMsJHQBhPUspBTaBZz/YXBCjoJ243GwC0G4QbwbRC7a3g9oJ4vwg+sAGPui8KdMgfiEaaF8bA7ULhLXxPZwHUYpNCmgFGOChQAlwFtTrgXI5UNmgkEE9PChkUNmgkEFlg0IGlQ0KGRQyqGRQhQuqcEERLihcUIULigQYYIABBhhggAFeB0wXBXOAE2BN310JTD/lw4I1vaKDmQQmMlj9P3VbN5is/FdQfdBigDX5K2Izb8FVE6B57oqt/4LFF/uvlHyxAV0rpo18zxfTZtn1LPe8XwEcnwijZxw9AAAAAElFTkSuQmCC" alt="Nodeimage Logo" style="height: 1.5em;vertical-align: middle;">
-          <span id="brandName">Nodeimage</span>
+          <span id="brandName">DoniaiImage</span>
         </h1>
-        <span class="nav-subtitle" id="brandSubtitle">NodeSeek专用图床·克隆版</span>
+        <span class="nav-subtitle" id="brandSubtitle">DoniaiImage专用图床</span>
       </div>
       <div class="nav-right">
         <div class="nav-toggle-container">
@@ -358,7 +358,17 @@
         </div>
         <div class="auth-form">
           <input type="text" id="loginUsername" placeholder="用户名" autocomplete="username">
-          <input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password">
+          <!-- 修改密码输入框部分 -->
+          <div class="password-input-container" style="position: relative; width: 100%;">
+            <input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password" style="padding-right: 40px;">
+            <button type="button" id="togglePasswordVisibility" class="toggle-password-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: transparent; border: none; cursor: pointer;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </button>
+          </div>
+
+<!--          <input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password">-->
           <div class="auth-actions">
             <button class="auth-btn-large" id="loginBtn">登录</button>
           </div>

@@ -21,10 +21,10 @@ const state = {
   resultFormats: new Map(),
   user: null,
   branding: {
-    name: 'Nodeimage',
-    subtitle: 'NodeSeek专用图床·克隆版',
+    name: 'DoniaiImage',
+    subtitle: 'Doniai专用图床',
     icon: null,
-    footer: 'Nodeimage 克隆版 · 本地演示'
+    footer: 'DoniaiImage 本地演示'
   }
 };
 
@@ -365,10 +365,17 @@ function renderResults() {
     const idSpan = document.createElement('div');
     idSpan.className = 'id';
     idSpan.textContent = res.filename || res.id;
+    idSpan.title = res.filename || res.id;
+
+    const sizeSpan = document.createElement('div');
+    sizeSpan.className = 'size';
+    sizeSpan.textContent = `大小：${formatSize(res.size)}`;
+
     const dateSpan = document.createElement('div');
     dateSpan.className = 'date';
     dateSpan.textContent = `${new Date().toLocaleString()} · 已上传`;
     titleRow.appendChild(idSpan);
+    titleRow.appendChild(sizeSpan);
     titleRow.appendChild(dateSpan);
     body.appendChild(titleRow);
 
@@ -520,10 +527,14 @@ function renderHistory() {
     const idSpan = document.createElement('div');
     idSpan.className = 'id';
     idSpan.textContent = img.id;
+    const sizeSpan = document.createElement('div');
+    sizeSpan.className = 'size';
+    sizeSpan.textContent = `大小：${formatSize(img.size)}`;
     const dateSpan = document.createElement('div');
     dateSpan.className = 'date';
     dateSpan.textContent = new Date(img.createdAt).toLocaleDateString();
     titleRow.appendChild(idSpan);
+    titleRow.appendChild(sizeSpan);
     titleRow.appendChild(dateSpan);
     body.appendChild(titleRow);
 
@@ -841,6 +852,27 @@ async function loginUser() {
 }
 
 function setupEventListeners() {
+  const togglePasswordBtn = document.getElementById('togglePasswordVisibility');
+  const loginPassword = document.getElementById('loginPassword');
+
+  if (togglePasswordBtn && loginPassword) {
+    togglePasswordBtn.addEventListener('click', () => {
+      const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+      loginPassword.setAttribute('type', type);
+
+      // 切换眼睛图标
+      const eyeIcon = togglePasswordBtn.querySelector('svg');
+      if (type === 'password') {
+        // 眼睛打开图标
+        eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+      } else {
+        // 眼睛关闭图标
+        eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+      }
+    });
+  }
+
+
   els.themeToggle.addEventListener('click', () => applyTheme(state.theme === 'light' ? 'dark' : 'light'));
   els.settingsBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -1060,6 +1092,11 @@ function setupEventListeners() {
   }
 
   els.loginBtn.addEventListener('click', () => loginUser());
+  els.loginPassword.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      loginUser();
+    }
+  });
 
   // 只保留一个返回按钮
   els.backBtn2.style.display = 'none';
@@ -1155,9 +1192,9 @@ function simpleMarkdown(md) {
 }
 
 function applyBranding() {
-  const displayName = state.branding.name || 'Nodeimage';
-  const displaySubtitle = state.branding.subtitle || 'NodeSeek专用图床·克隆版';
-  const displayFooter = state.branding.footer || 'Nodeimage 克隆版 · 本地演示';
+  const displayName = state.branding.name || 'DoniaiImage';
+  const displaySubtitle = state.branding.subtitle || 'Doniai专用图床';
+  const displayFooter = state.branding.footer || 'DoniaiImage 本地演示';
   const displayIcon = state.branding.icon || (els.brandLogoDisplay ? (els.brandLogoDisplay.dataset.default || els.brandLogoDisplay.src) : '');
 
   if (els.brandNameDisplay) els.brandNameDisplay.textContent = displayName;
@@ -1220,10 +1257,10 @@ async function loadBrandingFromServer() {
     if (!res.ok) throw new Error('branding fetch failed');
     const data = await res.json();
     state.branding = {
-      name: data.name || 'Nodeimage',
-      subtitle: data.subtitle || 'NodeSeek专用图床·克隆版',
+      name: data.name || 'DoniaiImage',
+      subtitle: data.subtitle || 'Doniai专用图床',
       icon: data.icon || '',
-      footer: data.footer || 'Nodeimage 克隆版 · 本地演示'
+      footer: data.footer || 'DoniaiImage 本地演示'
     };
   } catch (err) {
     console.error(err);
@@ -1232,10 +1269,10 @@ async function loadBrandingFromServer() {
 
 async function saveBrandingToServer() {
   const payload = {
-    name: state.branding.name || 'Nodeimage',
-    subtitle: state.branding.subtitle || 'NodeSeek专用图床·克隆版',
+    name: state.branding.name || 'DoniaiImage',
+    subtitle: state.branding.subtitle || 'Doniai专用图床',
     icon: state.branding.icon || '',
-    footer: state.branding.footer || 'Nodeimage 克隆版 · 本地演示'
+    footer: state.branding.footer || 'DoniaiImage 本地演示'
   };
   const res = await fetch('/api/settings/branding', {
     method: 'POST',

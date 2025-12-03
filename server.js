@@ -91,10 +91,10 @@ async function loadDb() {
       images: [],
       settings: {
         branding: {
-          name: 'Nodeimage',
-          subtitle: 'NodeSeek专用图床·克隆版',
+          name: 'DoniaiImage',
+          subtitle: 'Doniai专用图床',
           icon: '',
-          footer: 'Nodeimage 克隆版 · 本地演示'
+          footer: 'DoniaiImage本地演示'
         }
       }
     };
@@ -292,10 +292,10 @@ app.get('/api/settings/branding', async (req, res) => {
   const db = await loadDb();
   const branding = db.settings?.branding || {};
   res.json({
-    name: branding.name || 'Nodeimage',
-    subtitle: branding.subtitle || 'NodeSeek专用图床·克隆版',
+    name: branding.name || 'DoniaiImage',
+    subtitle: branding.subtitle || 'Doniai专用图床',
     icon: branding.icon || '',
-    footer: branding.footer || 'Nodeimage 克隆版 · 本地演示'
+    footer: branding.footer || 'DoniaiImage 本地演示'
   });
 });
 
@@ -303,10 +303,10 @@ app.post('/api/settings/branding', requireAuth, async (req, res) => {
   const db = await loadDb();
   db.settings = db.settings || {};
   db.settings.branding = {
-    name: req.body.name || 'Nodeimage',
-    subtitle: req.body.subtitle || 'NodeSeek专用图床·克隆版',
+    name: req.body.name || 'DoniaiImage',
+    subtitle: req.body.subtitle || 'Doniai专用图床',
     icon: req.body.icon || '',
-    footer: req.body.footer || 'Nodeimage 克隆版 · 本地演示'
+    footer: req.body.footer || 'DoniaiImage 本地演示'
   };
   await saveDb(db);
   res.json({ message: '已更新图床设置', branding: db.settings.branding });
@@ -485,5 +485,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Nodeimage clone running at http://localhost:${PORT}`);
+  console.log(`DoniaiImage clone running at http://localhost:${PORT}`);
 });
