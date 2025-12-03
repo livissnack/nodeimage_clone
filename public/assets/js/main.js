@@ -180,8 +180,19 @@ async function copyText(text, message = '已复制') {
     await navigator.clipboard.writeText(text);
     showNotification(message, 'success');
   } catch (err) {
-    console.error(err);
-    showNotification('复制失败，请手动选择文本', 'error');
+    // 降级到传统方法
+    try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      showNotification(message, 'success');
+    } catch (fallbackErr) {
+      console.error('复制失败:', fallbackErr);
+      showNotification('复制失败，请手动选择文本', 'error');
+    }
   }
 }
 
