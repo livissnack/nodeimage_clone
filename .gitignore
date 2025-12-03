@@ -6,3 +6,4 @@ package-lock.json
 data/db.json
 .DS_Store
 /.idea/
+Dockerfile.bak
