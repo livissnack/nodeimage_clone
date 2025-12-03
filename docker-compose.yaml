@@ -1,0 +1,14 @@
+services:
+  doniaiimage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7878:7878"
+    environment:
+      - PORT=7878
+      - NODE_ENV=production
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+    restart: unless-stopped
